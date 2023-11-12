@@ -13,7 +13,7 @@ export async function createProduct(req: Request, res: Response) {
 			description,
 			price: Number(price),
 			category,
-			ingredients: JSON.parse(ingredients)
+			ingredients: ingredients ? JSON.parse(ingredients): [], // apenas faz o parse se houver algum elemento para parsear
 		});
 
 		res.status(201).json(product)
