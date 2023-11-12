@@ -1,5 +1,7 @@
+import path from 'node:path';
 import express from 'express';
 import mongoose from 'mongoose';
+
 import { router } from './router';
 
 mongoose.connect('mongodb+srv://billadas:billadas2023@cluster0.yzte6mi.mongodb.net/?retryWrites=true&w=majority')
@@ -7,6 +9,7 @@ mongoose.connect('mongodb+srv://billadas:billadas2023@cluster0.yzte6mi.mongodb.n
 		const app = express();
 		const port = 3001;
 
+		app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 		app.use(express.json()); // transforma os arquivos da requisição em json. EX: icon de Pizza 🍕
 		app.use(router);
 
@@ -16,7 +19,7 @@ mongoose.connect('mongodb+srv://billadas:billadas2023@cluster0.yzte6mi.mongodb.n
 
 	})
 	.catch(() => {
-		console.log('Erro ao conectar Banco de Dados')
+		console.log('Erro ao conectar com Banco de Dados')
 	})
 
 
