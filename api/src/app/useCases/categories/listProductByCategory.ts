@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 
-import { Category } from "../../models/Category";
+import { Product } from "../../models/Product";
 
 export async function listProductByCategory(req: Request, res: Response){
 	try {
 
-		const categories = await Category.find();
+		const { categoryId } = req.params;
 
-		res.json(categories);
+		const products = await Product.find().where('category').equals(categoryId  );
+
+		res.json(products);
 	} catch (error) {
 		console.log(error)
 		res.sendStatus(500);
