@@ -7,7 +7,7 @@ export const Order = model('Order', new Schema({
 	},
 	status: {
 		type: String,
-		enum: ['WAITNG', 'IN_PRODUCTION', 'DONE'], // O enums erve para cada pedido atender apenas aos três estados citados no Array
+		enum: ['WAITING', 'IN_PRODUCTION', 'DONE'], // O enums erve para cada pedido atender apenas aos três estados citados no Array
 		default: 'WAITING' // o estado inicial de toos os pedidos deve ser o mencionado no default
 	},
 	createdAt: {
