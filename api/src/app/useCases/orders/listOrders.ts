@@ -2,8 +2,14 @@ import { Request, Response } from "express";
 
 import { Order } from "../../models/Order";
 
-export async function listOrder(req: Request, res: Response){
-	const orders = await Order.find();
+export async function listOrders(req: Request, res: Response){
 
-	res.status(201).json(orders);
+	try {
+		const orders = await Order.find();
+
+		res.status(201).json(orders);
+	} catch (error) {
+		console.log(error);
+		res.sendStatus(500);
+	}
 };
