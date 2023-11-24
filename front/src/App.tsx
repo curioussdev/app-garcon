@@ -1,3 +1,12 @@
+import { GlobalStyles } from "./styles/globalStyles";
+
+import { Header } from "./components/Header";
+
 export function App() {
-    return <h1>Hello Word</h1>
-}
+
+  return (
+    <>
+      <GlobalStyles/>
+      <Header />
+  </>
+)}
