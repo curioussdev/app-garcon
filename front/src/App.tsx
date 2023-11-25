@@ -1,6 +1,7 @@
 import { GlobalStyles } from "./styles/globalStyles";
 
 import { Header } from "./components/Header";
+import { Orders } from "./components/Orders";
 
 export function App() {
 
@@ -8,5 +9,6 @@ export function App() {
     <>
       <GlobalStyles/>
       <Header />
+      <Orders />
   </>
 )}
