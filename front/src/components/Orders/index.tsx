@@ -1,64 +1,32 @@
-import { Container, Board, OrdersContainer} from "./styles"
+import { OrdersBoard } from "../OrdersBoard"
+import { Container} from "./styles"
 
 export function Orders() {
+
   return (
     <Container>
-      <Board>
-        <header>
-          <span>🕑</span>
-          <strong>Fila de espera</strong>
-          <span>(1)</span>
-        </header>
+      <OrdersBoard
+        icon="🕑"
+        title="Fila de espera"
+      />
 
-        <OrdersContainer>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens </span>
-          </button>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens </span>
-          </button>
-        </OrdersContainer>
-      </Board>
+      <OrdersBoard
+        icon="👩‍🍳"
+        title="Em preparação"
+      />
+      <OrdersBoard
+        icon="✅"
+        title="Pronto"
+      />
 
-      <Board>
-        <header>
-          <span>🕑</span>
-          <strong>Fila de espera</strong>
-          <span>(1)</span>
-        </header>
+      <OrdersBoard
+        icon="🔴"
+        title="Cancelados"
+      />
 
-        <OrdersContainer>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens </span>
-          </button>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens </span>
-          </button>
-        </OrdersContainer>
-      </Board>
 
-      <Board>
-        <header>
-          <span>🕑</span>
-          <strong>Fila de espera</strong>
-          <span>(1)</span>
-        </header>
 
-        <OrdersContainer>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens </span>
-          </button>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens </span>
-          </button>
-        </OrdersContainer>
-      </Board>
+
     </Container>
   )
 }
