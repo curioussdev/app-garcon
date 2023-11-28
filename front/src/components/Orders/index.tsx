@@ -1,4 +1,4 @@
-import { Order } from "../../types/order"
+import { Order } from '../../../src/types/Order';
 import { OrdersBoard } from "../OrdersBoard"
 import { Container } from "./styles"
 

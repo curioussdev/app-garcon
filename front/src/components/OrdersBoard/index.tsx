@@ -1,5 +1,6 @@
-import { Order } from '../../types/order';
-import { Board, OrdersContainer } from './styles'
+import { Order } from '../../../src/types/Order';
+import { OrderModal } from '../OrderModal';
+import { Board, OrdersContainer } from './styles';
 
 interface OrderBoardProps {
   icon: string;
@@ -8,9 +9,15 @@ interface OrderBoardProps {
 }
 
 export function OrdersBoard({ icon, title, orders }: OrderBoardProps) {
+  function handleOpenOrderModal(){
+    alert('Modal Abrto');
+  }
 
   return (
     <Board>
+
+      <OrderModal />
+
       <header>
         <span>{icon}</span>
         <strong>{title}</strong>
@@ -18,10 +25,10 @@ export function OrdersBoard({ icon, title, orders }: OrderBoardProps) {
       </header>
 
 
-      {orders.length > 0 && (
+      {orders.length > 0 && ( // Renderização de condicional
         <OrdersContainer>
         {orders.map((orders) => (
-          <button type="button" key={orders._id}>
+          <button type="button" key={orders._id} onClick={handleOpenOrderModal}>
             <strong>Mesa {orders.table}</strong>
             <span>{orders.products.length} itens</span>
           </button>
