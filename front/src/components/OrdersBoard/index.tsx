@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Order } from '../../../src/types/Order';
 import { OrderModal } from '../OrderModal';
 import { Board, OrdersContainer } from './styles';
@@ -9,14 +11,16 @@ interface OrderBoardProps {
 }
 
 export function OrdersBoard({ icon, title, orders }: OrderBoardProps) {
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
   function handleOpenOrderModal(){
-    alert('Modal Abrto');
+    setIsModalVisible(true)
   }
 
   return (
     <Board>
 
-      <OrderModal />
+      <OrderModal visible={isModalVisible} />
 
       <header>
         <span>{icon}</span>
