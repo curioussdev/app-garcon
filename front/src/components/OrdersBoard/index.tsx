@@ -34,7 +34,7 @@ export function OrdersBoard({ icon, title, orders }: OrderBoardProps) {
       {orders.length > 0 && ( // Renderização de condicional
         <OrdersContainer>
           {orders.map((orders) => (
-            <button type="button" key={orders._id} onClick={() => handleOpenOrderModal(order)}>
+            <button type="button" key={orders._id} onClick={() => handleOpenOrderModal(orders)}>
               <strong>Mesa {orders.table}</strong>
               <span>{orders.products.length} itens</span>
             </button>
