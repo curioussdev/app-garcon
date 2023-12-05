@@ -1,6 +1,7 @@
 import closeIcon from '../../assets/images/close-icon.svg';
 import { ModalBody, OrderDetails, Overlay } from "./styles";
 import { Order } from '../../types/Order';
+// import testeIMG from '../../../../api/uploads/1699479152411-quatro-queijos.png'
 
 interface OrderModalProps {
   visible: boolean;
@@ -43,6 +44,14 @@ export function OrderModal({ visible, order }: OrderModalProps){
 
         <OrderDetails>
           <strong>Itens</strong>
+
+          {order.products.map(({ _id, product, /*quantity*/ }) => (
+            <div className="item" key={_id}>
+              <img
+                src={`https//localhost:3001/uploads/${product.imagePath}`}
+                alt={product.name} />
+            </div>
+          ))}
         </OrderDetails>
 
       </ModalBody>
