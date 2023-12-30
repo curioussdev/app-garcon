@@ -101,4 +101,20 @@ export const OrderDetails = styled.div`
       }
     }
   }
+
+  .total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    span{
+      font-size: 18px;
+    }
+
+    strong{
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
 `;
