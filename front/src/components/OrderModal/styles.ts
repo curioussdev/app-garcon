@@ -94,6 +94,7 @@ export const OrderDetails = styled.div`
         	//display: flex;
           display: block;
           margin-bottom: 4px ;
+          font-weight: bold;
       }
 
       span{
@@ -116,5 +117,43 @@ export const OrderDetails = styled.div`
       font-weight: bold;
       font-size: 18px;
     }
+  }
+
+
+`;
+
+export const Actions = styled.div`
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: 20px 0px;
+
+  .primary{
+    width: 100%;
+    background: #333333;
+    border-radius: 48px;
+    border: 0;
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    gap: 8px;
+  }
+
+  .secondary{
+
+    padding: 14px 24px;
+    color: red;
+    font-weight: bold;
+    border: 0;
+    background: transparent;
+    //background: blue;
+    margin-top: 16px;
+    border-radius: 48px;
+   // width: 100%;
+
   }
 `;

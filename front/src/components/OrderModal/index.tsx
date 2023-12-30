@@ -1,5 +1,5 @@
 import closeIcon from '../../assets/images/close-icon.svg';
-import { ModalBody, OrderDetails, Overlay } from "./styles";
+import { ModalBody, OrderDetails, Overlay, Actions } from "./styles";
 import { Order } from '../../types/Order';
 import { formatCurrency } from '../../utils/formatCurrency';
 // import testeIMG from '../../../../api/uploads/1699479152411-quatro-queijos.png'
@@ -25,7 +25,7 @@ export function OrderModal({ visible, order }: OrderModalProps) {
 
   //let total = 0;
   //order.products.forEach(({ product, quantity }) => {
-   // total += product.price * quantity
+  // total += product.price * quantity
   //});
 
   const total = order.products.reduce((total, { product, quantity }) => {
@@ -86,6 +86,17 @@ export function OrderModal({ visible, order }: OrderModalProps) {
 
 
         </OrderDetails>
+
+        <Actions>
+          <button type='button' className='primary'>
+            <span>👩‍🍳</span>
+            <span>Iniciar produção</span>
+          </button>
+
+          <button type='button' className='secondary'>
+            Cancelar Pedido
+          </button>
+        </Actions>
 
       </ModalBody>
     </Overlay>
