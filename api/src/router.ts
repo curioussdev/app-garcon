@@ -44,7 +44,7 @@ router.post('/products', upload.single('image'), createProduct);
 router.get('/categories/:categoryId/products', listProductByCategory);
 
 // List orders
-router.get('/orders', listOrders)
+router.get('/orders', listOrders);
 
 // Create order
 router.post('/orders', createOrder);

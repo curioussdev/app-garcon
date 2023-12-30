@@ -17,6 +17,7 @@ export function OrdersBoard({ icon, title, orders }: OrderBoardProps) {
 
   function handleOpenOrderModal(order: Order) {
     setIsModalVisible(true);
+    console.log(order)
     setSelectedOrder(order);
   }
 
