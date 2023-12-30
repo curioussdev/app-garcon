@@ -2,11 +2,13 @@ import closeIcon from '../../assets/images/close-icon.svg';
 import { ModalBody, OrderDetails, Overlay, Actions } from "./styles";
 import { Order } from '../../types/Order';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { useEffect } from 'react';
 // import testeIMG from '../../../../api/uploads/1699479152411-quatro-queijos.png'
 
 interface OrderModalProps {
   visible: boolean;
   order: Order | null;
+  onClose():  void;
 }
 
 const status = {
@@ -16,7 +18,21 @@ const status = {
 
 }
 
-export function OrderModal({ visible, order }: OrderModalProps) {
+export function OrderModal({ visible, order, onClose }: OrderModalProps) {
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if(event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [onClose]);
 
   if (!visible || !order) { // condição para abrir o OrderModal
     return null;
@@ -30,7 +46,9 @@ export function OrderModal({ visible, order }: OrderModalProps) {
 
   const total = order.products.reduce((total, { product, quantity }) => {
     return total + (product.price * quantity)
-  }, 0)
+  }, 0);
+
+ 
 
   return (
     <Overlay>
@@ -38,7 +56,7 @@ export function OrderModal({ visible, order }: OrderModalProps) {
         <header>
           <strong>Mesa {order.table}</strong>
 
-          <button type="button">
+          <button type="button" onClick={onClose} >
             <img src={closeIcon} alt="icone de fechar modal" />
           </button>
         </header>
