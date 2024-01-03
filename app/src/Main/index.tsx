@@ -1,11 +1,11 @@
-import { Text } from '../components/Text';
-
 import { Container } from './styles';
+import { Header } from '../components/Header';
+
 
 export function Main(){
     return(
         <Container>
-            <Text>Main Renderixou</Text>
+            <Header />
         </Container>
     );
 }
