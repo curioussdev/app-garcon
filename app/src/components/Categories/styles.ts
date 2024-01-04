@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 
 export const Category = styled.View`
 align-items: center;
+margin-left: 24px;
 `;
 
 export const Icon = styled.View`

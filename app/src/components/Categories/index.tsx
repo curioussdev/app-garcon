@@ -5,9 +5,29 @@ import { Text } from '../Text';
 import { Category, Icon } from './styles';
 
 
-export function Categories(){
+export function Categories() {
     return (
-        categories.map((category) => (
+        <>
+            <FlatList
+                horizontal
+                contentContainerStyle={{ paddingRight: 24}}
+                showsHorizontalScrollIndicator={false}
+                data={categories}
+                keyExtractor={category => category._id}
+                renderItem={( { item: category  } ) => (
+                    <Category>
+                        <Icon>
+                            <Text>{category.icon}</Text>
+                        </Icon>
+
+                        <Text size={14} weight='600'>{category.name}</Text>
+                    </Category>
+                )}
+            />
+
+
+
+            {/* categories.map((category) => (
             <Category key={category._id}>
                 <Icon>
                     <Text>{category.icon}</Text>
@@ -16,5 +36,7 @@ export function Categories(){
                 <Text size={14} weight='600'>{category.name}</Text>
             </Category>
         ))
+        */}
+        </>
     );
 }
