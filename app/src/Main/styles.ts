@@ -7,7 +7,7 @@ const isAndroid = Platform.OS === 'android';
 export const Container = styled.SafeAreaView`
    margin-top: ${isAndroid ? `${StatusBar.currentHeight}px` : '0'}; /* seta a distância de 54px independente do dispositivo () Android / ios*/
    flex: 1;
-   background: #f5f5f5; /*#FaFaFa*/
+   background: #FaFaFa; /*#F5F5F5*/
 `;
 
 export const CategoryContainer = styled.View`
