@@ -15,7 +15,7 @@ export function Categories() {
                 data={categories}
                 keyExtractor={category => category._id}
                 renderItem={( { item: category  } ) => (
-                    <Category>
+                    <Category onPress={() => alert('PRESSIONOU')}>
                         <Icon>
                             <Text>{category.icon}</Text>
                         </Icon>

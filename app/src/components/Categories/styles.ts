@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 
 const isAndroid = Platform.OS === 'android';
 
-export const Category = styled.View`
+export const Category = styled.TouchableOpacity`
 align-items: center;
 margin-left: 24px;
 `;
@@ -18,10 +18,14 @@ export const Icon = styled.View`
     justify-content: center;
     margin-bottom: 8px;
 
-    box-shadow: 0px 2px 1px rgba(0, 0, 0, ${isAndroid ? 0.7 : 0.1}); // SETA O BOX-SHADOW Regularizado para iphone vs ios
-    elevation: 2;
+   box-shadow: 0px 2px 1px rgba(0, 0, 0, ${isAndroid ? 0.8 : 0.1});
+   elevation: 1;  
 `;
 
+
+/** box-shadow: 0px 2px
+ *  1px rgba(0, 0, 0, ${isAndroid ? 0.7 : 0.1}); // SETA O BOX-SHADOW Regularizado para iphone vs ios
+    elevation: 2; */
 //flex-directionn padrão do mobile == column
 //fle-direction padrão da web = row
 
