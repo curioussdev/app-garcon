@@ -11,7 +11,8 @@ export function Categories() {
     const [selectedCategory, setSelectedCategory] = useState('');
 
     function handleSelectedCategory(categoryId: string) {
-        setSelectedCategory(categoryId);
+        const category = selectedCategory === categoryId ? '' : categoryId; // se o user clicar em uma cat, chama o handleSelectedCategory, caso não, permanece no unitial state
+        setSelectedCategory(category);
     }
     return (
         <>
