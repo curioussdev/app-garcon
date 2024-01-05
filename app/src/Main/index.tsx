@@ -30,7 +30,9 @@ export function Main() {
 
         <Footer>
             <FooterContainer>
-                <Button />
+                <Button onPress={() => alert('CLICOY')}>
+                    Novo Pedido
+                </Button>
             </FooterContainer>
         </Footer>
         </>
