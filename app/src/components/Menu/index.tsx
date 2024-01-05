@@ -3,25 +3,32 @@ import { FlatList } from 'react-native';
 import { products } from '../../mocks/products';
 import { Text } from '../Text';
 
-import { Product, Image, PeoductDetails} from './styles';
+import { Product, Image, PeoductDetails } from './styles';
 
-export function Menu(){
+export function Menu() {
     return (
-        <FlatList 
+        <FlatList
             data={products}
-            contentContainerStyle={{ marginTop: 32}}
-            keyExtractor={products => products._id}
-            renderItem={({item: product }) => (
-                <Product>
-                    <Image />
+            style={{ marginTop: 32 }}
+            contentContainerStyle={{ paddingHorizontal: 24}}
+            keyExtractor={product => product._id}
+            renderItem={({ item: product }) => {
+                return (
+                    <Product>
+                        <Image 
+                            source={{
+                                uri: `http://192.168.100.237:3001/uploads/${product.imagePath}`
+                            }}
+                        />
 
-                    <PeoductDetails>
-                        <Text>{product.name}</Text>
-                        <Text>{product.description}</Text>
-                        <Text>{product.price}</Text>
-                    </PeoductDetails>
-                </Product>
-            )}
+                        <PeoductDetails>
+                            <Text>{product.name}</Text>
+                            <Text>{product.description}</Text>
+                            <Text>{product.price}</Text>
+                        </PeoductDetails>
+                    </Product>
+                );
+            }}
         />
     );
 }
