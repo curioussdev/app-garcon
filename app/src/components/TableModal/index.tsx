@@ -5,12 +5,18 @@ import { Close } from '../Icons/Close';
 import { Overlay, ModalBody, ModalForm, ModalHeader, Input } from './styles';
 import { Button } from '../Button';
 
+interface TableModalProps {
+    visible: boolean;
+    onClose: () => void;
+}
 
 // o behavior serve para inferir limites ao teclado face a abertura de modais
 
-export function TableModal() {
+export function TableModal( { visible, onClose }: TableModalProps ) {
+    
     return (
         <Modal
+        visible={visible}
             transparent
         >
             <Overlay behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
@@ -18,7 +24,7 @@ export function TableModal() {
                     <ModalHeader>
                         <Text weight='600'>Informe a mesa</Text>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={onClose}>
                             <Close color="#666" />
                         </TouchableOpacity>
                     </ModalHeader>
