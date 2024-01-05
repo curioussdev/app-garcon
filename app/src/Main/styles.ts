@@ -31,6 +31,7 @@ export const Footer = styled.View`
     background: green;
     background: #fff;
     //border-radius: 10px;
+    padding: 16px 24px;
 `;
 
 export const FooterContainer = styled.SafeAreaView``;
