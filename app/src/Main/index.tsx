@@ -25,7 +25,9 @@ export function Main() {
     return (
         <>
             <Container>
-                <Header />
+                <Header
+                    selectedTable={selectedTable}
+                />
 
                 <CategoryContainer>
                     <Categories />
