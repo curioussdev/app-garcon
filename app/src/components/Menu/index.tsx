@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { products } from '../../mocks/products';
 import { Text } from '../Text';
 
-import { Product, Image, PeoductDetails } from './styles';
+import { Product, ProductImage, PeoductDetails } from './styles';
 
 export function Menu() {
     return (
@@ -15,16 +15,18 @@ export function Menu() {
             renderItem={({ item: product }) => {
                 return (
                     <Product>
-                        <Image 
+                        <ProductImage 
                             source={{
                                 uri: `http://192.168.100.237:3001/uploads/${product.imagePath}`
                             }}
                         />
 
                         <PeoductDetails>
-                            <Text>{product.name}</Text>
-                            <Text>{product.description}</Text>
-                            <Text>{product.price}</Text>
+                            <Text weight='600'>{product.name}</Text>
+                            <Text size={14} color='#666' style={{ marginVertical: 8}}>
+                                {product.description}
+                            </Text>
+                            <Text size={14} weight='600'>{product.price}</Text>
                         </PeoductDetails>
                     </Product>
                 );
