@@ -1,16 +1,18 @@
 import { FlatList } from 'react-native';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 import { products } from '../../mocks/products';
 import { Text } from '../Text';
 
-import { Product, ProductImage, PeoductDetails } from './styles';
-import { formatCurrency } from '../../utils/formatCurrency';
+import { Product, ProductImage, PeoductDetails, Separator } from './styles';
+
 
 export function Menu() {
     return (
         <FlatList
             data={products}
             style={{ marginTop: 32 }}
+            ItemSeparatorComponent={Separator}
             contentContainerStyle={{ paddingHorizontal: 24}}
             keyExtractor={product => product._id}
             renderItem={({ item: product }) => {
