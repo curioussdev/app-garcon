@@ -1,7 +1,7 @@
-import { 
-    Container, 
-    CategoryContainer, 
-    MenuContainer, 
+import {
+    Container,
+    CategoryContainer,
+    MenuContainer,
     Footer,
     FooterContainer
 } from './styles';
@@ -15,36 +15,44 @@ import { useState } from 'react';
 
 export function Main() {
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
-   
+    const [selectedTable, setSelectedTable] = useState('');
+
+    function handleSaveTable(table: string) {
+        setSelectedTable(table);
+    }
+
 
     return (
         <>
-        <Container>
-            <Header />
+            <Container>
+                <Header />
 
-            <CategoryContainer>
-                <Categories />
-            </CategoryContainer>
+                <CategoryContainer>
+                    <Categories />
+                </CategoryContainer>
 
-            <MenuContainer>
-                <Menu />
-            </MenuContainer>
-            
-            
-        </Container>
+                <MenuContainer>
+                    <Menu />
+                </MenuContainer>
 
-        <Footer>
-            <FooterContainer>
-                <Button onPress={() => setIsTableModalVisible(true)}>
-                    Novo Pedido
-                </Button>
-            </FooterContainer>
-        </Footer>
 
-        <TableModal 
-            visible={isTableModalVisible}
-            onClose={() => setIsTableModalVisible(false)}
-        />
+            </Container>
+
+            <Footer>
+                <FooterContainer>
+                    {!selectedTable && (
+                        <Button onPress={() => setIsTableModalVisible(true)}>
+                            Novo Pedido
+                        </Button>
+                    )}
+                </FooterContainer>
+            </Footer>
+
+            <TableModal
+                visible={isTableModalVisible}
+                onClose={() => setIsTableModalVisible(false)}
+                onSave={handleSaveTable}
+            />
         </>
     );
 }

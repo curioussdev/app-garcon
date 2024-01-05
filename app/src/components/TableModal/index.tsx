@@ -9,13 +9,20 @@ import { useState } from 'react';
 interface TableModalProps {
     visible: boolean;
     onClose: () => void;
+    onSave: (table: string) => void;
 }
 
 // o behavior serve para inferir limites ao teclado face a abertura de modais
 
-export function TableModal( { visible, onClose }: TableModalProps ) {
+export function TableModal( { visible, onClose, onSave }: TableModalProps ) {
     const [inputValue, setInputValue] = useState('');
     
+
+    function handleSave(){
+        onSave(inputValue);
+        onClose();
+    }
+
     return (
         <Modal
             visible={visible}
@@ -39,7 +46,9 @@ export function TableModal( { visible, onClose }: TableModalProps ) {
                             keyboardType='number-pad'
                             onChangeText={setInputValue}
                         />
-                        <Button onPress={() => alert(inputValue)}>Salvar</Button>
+                        <Button onPress={handleSave} disabled={inputValue.length === 0}>
+                            Salvar
+                        </Button>
                     </ModalForm>
                 </ModalBody>
             </Overlay>
