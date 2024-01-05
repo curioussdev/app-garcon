@@ -4,6 +4,7 @@ import { Close } from '../Icons/Close';
 
 import { Overlay, ModalBody, ModalForm, ModalHeader, Input } from './styles';
 import { Button } from '../Button';
+import { useState } from 'react';
 
 interface TableModalProps {
     visible: boolean;
@@ -13,6 +14,7 @@ interface TableModalProps {
 // o behavior serve para inferir limites ao teclado face a abertura de modais
 
 export function TableModal( { visible, onClose }: TableModalProps ) {
+    const [inputValue, setInputValue] = useState('');
     
     return (
         <Modal
@@ -35,14 +37,9 @@ export function TableModal( { visible, onClose }: TableModalProps ) {
                             placeholder="Número da mesa"
                             placeholderTextColor="#666"
                             keyboardType='number-pad'
+                            onChangeText={setInputValue}
                         />
-
-                        <Input
-                            placeholder="Detalhes do pedido"
-                            placeholderTextColor="#666"
-                            keyboardType='ascii-capable'
-                        />
-                        <Button onPress={() => alert('Salvou')}>Salvar</Button>
+                        <Button onPress={() => alert(inputValue)}>Salvar</Button>
                     </ModalForm>
                 </ModalBody>
             </Overlay>
