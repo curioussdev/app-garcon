@@ -14,7 +14,7 @@ interface TableModalProps {
 
 // o behavior serve para inferir limites ao teclado face a abertura de modais
 
-export function TableModal( { visible, onClose, onSave }: TableModalProps ) {
+export function Table( { visible, onClose, onSave }: TableModalProps ) {
     const [inputValue, setInputValue] = useState('');
     
 
