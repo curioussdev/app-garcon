@@ -33,7 +33,9 @@ export function Header({ selectedTable }: HeaderProps) {
                     </TouchableOpacity>
                     </OrderHeader>
 
-                    <Table>Mesa {selectedTable}</Table>
+                    <Table>
+                        <Text>Mesa {selectedTable}</Text>    
+                    </Table>
                 </Content>
             )}
 
