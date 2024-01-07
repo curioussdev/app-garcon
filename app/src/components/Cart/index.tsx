@@ -7,12 +7,15 @@ import {
      Actions, 
      Image, 
      QuantityContainer,
-     ProductDetails
+     ProductDetails,
+     Summary,
+     TotalContainer
 } from './styles';
 import { Text } from '../Text';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { PlusCircle } from '../Icons/PlusCircle';
 import { MinusCircle } from '../Icons/MinusCircle';
+import { Button } from '../Button';
 
 interface CartProps {
     cartItems: CartItem[];
@@ -21,10 +24,12 @@ interface CartProps {
 
 export function Cart({ cartItems }: CartProps) {
     return (
+        <>
         <FlatList
             data={cartItems}
             keyExtractor={cartItem => cartItem.product._id}
             showsVerticalScrollIndicator={false}
+            style={{ marginBottom: 20}}
             renderItem={({ item: cartItem }) => (
                 <Item>
                     <ProductContainer>
@@ -58,5 +63,21 @@ export function Cart({ cartItems }: CartProps) {
                 </Item>
             )}
         />
+
+        <Summary>
+            <TotalContainer>
+                <Text color='#666'>Total</Text>
+                <Text size={20} weight='600'>{formatCurrency(6600)}</Text>
+            </TotalContainer>
+
+            <Button onPress={()=> alert('confirmar pedido')}>
+                confirmar pedido
+            </Button> 
+                
+            
+
+        </Summary>
+
+        </>
     );
 }

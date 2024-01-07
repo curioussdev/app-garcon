@@ -28,7 +28,7 @@ export function Main() {
         {
             quantity: 2,
             product: products[1]
-        }
+        },
     ]);
 
 
