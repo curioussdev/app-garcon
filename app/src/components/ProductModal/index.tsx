@@ -1,12 +1,12 @@
 import { FlatList, Modal } from 'react-native';
 import { Product } from '../../types/Product';
-import { 
-    Image, 
-    CloseButton, 
-    ModalBody, 
-    Header, 
-    IngredientsContainer, 
-    Ingredient, 
+import {
+    Image,
+    CloseButton,
+    ModalBody,
+    Header,
+    IngredientsContainer,
+    Ingredient,
     Footer,
     FooterContainer,
     PriceContainer
@@ -49,31 +49,31 @@ export function ProductModal({ visible, onClose, product }: ProductModalProps) {
             <ModalBody>
                 <Header>
                     <Text size={24} weight='600'>{product.name}</Text>
-                    <Text color='#666' style={{ marginTop: 8}}>{product.description}</Text>
+                    <Text color='#666' style={{ marginTop: 8 }}>{product.description}</Text>
                 </Header>
 
                 {product.ingredients.length > 0 && (
                     <IngredientsContainer>
-                    <Text weight='600' color='#666'>Igredientes</Text>
+                        <Text weight='600' color='#666'>Igredientes</Text>
 
-                    <FlatList 
-                        data={product.ingredients}
-                        keyExtractor={ingredient => ingredient._id}
-                        style={{ marginTop: 16}}
-                        showsVerticalScrollIndicator={false}
-                        renderItem={({item: ingredient }) => (
-                            <Ingredient>
-                                <Text>{ingredient.icon}</Text>
-                                <Text size={14} color='#666' style={{marginLeft: 20}}>
-                                    {ingredient.name}
+                        <FlatList
+                            data={product.ingredients}
+                            keyExtractor={ingredient => ingredient._id}
+                            style={{ marginTop: 16 }}
+                            showsVerticalScrollIndicator={false}
+                            renderItem={({ item: ingredient }) => (
+                                <Ingredient>
+                                    <Text>{ingredient.icon}</Text>
+                                    <Text size={14} color='#666' style={{ marginLeft: 20 }}>
+                                        {ingredient.name}
                                     </Text>
-                            </Ingredient>
-                        )}
-                    />
-                </IngredientsContainer>
-            
+                                </Ingredient>
+                            )}
+                        />
+                    </IngredientsContainer>
+
                 )}
-</ModalBody>
+            </ModalBody>
             <Footer>
                 <FooterContainer>
                     <PriceContainer>
@@ -83,7 +83,7 @@ export function ProductModal({ visible, onClose, product }: ProductModalProps) {
 
                     <Button onPress={() => alert('Adicionar ao pedido')}>Adicionar ao pedido</Button>
                 </FooterContainer>
-            </Footer>                   
+            </Footer>
 
         </Modal>
     );
