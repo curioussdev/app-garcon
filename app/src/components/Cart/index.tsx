@@ -25,11 +25,12 @@ interface CartProps {
 export function Cart({ cartItems }: CartProps) {
     return (
         <>
+        <Text size={20} weight='600'>🛒 Carrinho de pedido</Text>
         <FlatList
             data={cartItems}
             keyExtractor={cartItem => cartItem.product._id}
             showsVerticalScrollIndicator={false}
-            style={{ marginBottom: 20}}
+            style={{ marginBottom: 20, maxHeight: 140}}
             renderItem={({ item: cartItem }) => (
                 <Item>
                     <ProductContainer>

@@ -21,14 +21,12 @@ export function Main() {
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
     const [selectedTable, setSelectedTable] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([
-        {
-            quantity: 1,
-            product: products[0]
-        },
-        {
-            quantity: 2,
-            product: products[1]
-        },
+        /*   {
+               quantity: 1,
+               product: products[0]
+           },
+   
+           */
     ]);
 
 
