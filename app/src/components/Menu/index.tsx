@@ -5,16 +5,17 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { products } from '../../mocks/products';
 import { Text } from '../Text';
 
-import { Product, ProductImage, PeoductDetails, Separator, AddToCartButton } from './styles';
+import { ProductContainer, ProductImage, PeoductDetails, Separator, AddToCartButton } from './styles';
 import { PlusCircle } from '../Icons/PlusCircle';
 
 import { ProductModal } from '../ProductModal';
+import { Product } from '../../types/Product';
 
 export function Menu() {
     const [ isModalVisible, setIsModalVisible] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState<null | Product>(null);
 
-    function handleOpenModal(product) {
+    function handleOpenModal(product: Product) {
         setIsModalVisible(true);
         setSelectedProduct(product);
     }
@@ -24,6 +25,7 @@ export function Menu() {
             <ProductModal 
                 visible={isModalVisible}
                 onClose={() => setIsModalVisible(false)}
+                product={selectedProduct}
             />
             
             <FlatList
@@ -35,7 +37,7 @@ export function Menu() {
                 renderItem={({ item: product }) => {
                     return (
 
-                        <Product onPress={() => handleOpenModal(product)}>
+                        <ProductContainer onPress={() => handleOpenModal(product)}>
                             <ProductImage
                                 source={{
                                     uri: `http://192.168.0.110:3001/uploads/${product.imagePath}`
@@ -53,7 +55,7 @@ export function Menu() {
                             <AddToCartButton>
                                 <PlusCircle />
                             </AddToCartButton>
-                        </Product>
+                        </ProductContainer>
                     );
                 }}
             />
