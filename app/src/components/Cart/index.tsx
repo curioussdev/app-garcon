@@ -26,7 +26,9 @@ export function Cart({ cartItems }: CartProps) {
     return (
         <>
         <Text size={20} weight='600'>🛒 Carrinho de pedido</Text>
-        <FlatList
+        
+        { cartItems.length > 0 && (
+            <FlatList
             data={cartItems}
             keyExtractor={cartItem => cartItem.product._id}
             showsVerticalScrollIndicator={false}
@@ -64,14 +66,23 @@ export function Cart({ cartItems }: CartProps) {
                 </Item>
             )}
         />
+        )}
 
         <Summary>
             <TotalContainer>
-                <Text color='#666'>Total</Text>
-                <Text size={20} weight='600'>{formatCurrency(6600)}</Text>
+                {cartItems.length > 0 ? (
+                    <>
+                    <Text color='#666'>Total</Text>
+                    <Text size={20} weight='600'>{formatCurrency(6600)}</Text>
+                    </>
+                ): ( 
+                    <Text color='#999'>o seu carrinho vazio</Text>
+                )}
             </TotalContainer>
 
-            <Button onPress={()=> alert('confirmar pedido')}>
+            <Button onPress={()=> alert('confirmar pedido')}
+                disabled={cartItems.length === 0}
+            >
                 confirmar pedido
             </Button> 
                 
