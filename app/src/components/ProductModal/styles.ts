@@ -49,12 +49,14 @@ export const Footer = styled.View`
     background: #fff;
     //border-radius: 10px;
     padding: 16px 24px;
+   
 `;
 
 export const FooterContainer = styled.SafeAreaView`
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
+
 `;
 
 export const PriceContainer = styled.View`

@@ -4,7 +4,7 @@ export const products = [
         name: 'Pizza quatro queijos',
         description: 'Deliciosa pizza quatro queijos com borda simples',
         imagePath: '1703963792532-quatro-queijos.png',
-        price: 3000,
+        price: 6000,
         ingredients: [
             {
                 name: 'Mussarela',
