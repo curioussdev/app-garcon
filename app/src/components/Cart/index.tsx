@@ -21,11 +21,12 @@ import { Product } from '../../types/Product';
 interface CartProps {
     cartItems: CartItem[];
     onAdd: (product: Product) => void;
+    onDecrement: (product: Product) => void;
 }
 
 
-export function Cart({ cartItems, onAdd }: CartProps) {
-    const total = cartItems.reduce((acc, cartItem) => {
+export function Cart({ cartItems, onAdd, onDecrement }: CartProps) {
+    const total = cartItems.reduce((acc, cartItem) => { // total a pagar 
         return acc + cartItem.quantity * cartItem.product.price;
     }, 0);
 
@@ -68,7 +69,7 @@ export function Cart({ cartItems, onAdd }: CartProps) {
                             <PlusCircle />
                         </TouchableOpacity>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => onDecrement(cartItem.product)}>
                             <MinusCircle />
                         </TouchableOpacity>
                     </Actions>
@@ -82,7 +83,7 @@ export function Cart({ cartItems, onAdd }: CartProps) {
                 {cartItems.length > 0 ? (
                     <>
                     <Text color='#666'>Total</Text>
-                    <Text size={20} weight='600'>{formatCurrency(total)}</Text>
+                    <Text size={16} weight='600'>{formatCurrency(total)}</Text>
                     </>
                 ): ( 
                     <Text color='#999'>o seu carrinho  está vazio</Text>
