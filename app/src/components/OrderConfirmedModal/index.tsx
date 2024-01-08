@@ -3,6 +3,7 @@ import { Modal } from 'react-native';
 import { Container, OkButton } from './styles';
 import { CheckCircle } from '../Icons/CheckCircle';
 import { Text } from '../Text';
+import { StatusBar } from 'expo-status-bar';
 
 interface OrderConfirmedModalProps  {
     visible: boolean;
@@ -15,6 +16,11 @@ export function OrderConfirmedModal({ visible, onOk }: OrderConfirmedModalProps)
             visible={visible}
             animationType="fade"
         >
+
+            <StatusBar style="light"
+                backgroundColor='#D73035'
+            />
+
             <Container>
                 <CheckCircle />
 
