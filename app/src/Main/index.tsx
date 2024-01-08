@@ -19,10 +19,7 @@ import { Product } from '../types/Product';
 export function Main() {
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
     const [selectedTable, setSelectedTable] = useState('');
-    const [cartItems, setCartItems] = useState<CartItem[]>([
-      
-
-  ]);
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
 
     function handleSaveTable(table: string) {
@@ -38,7 +35,26 @@ export function Main() {
             setIsTableModalVisible(true);
         }
 
-        alert(product.name);
+        setCartItems((prevState) => {
+            const itemIndex = prevState.findIndex(cartItem => cartItem.product._id=== product._id);
+
+            if(itemIndex < 0) {
+                return prevState.concat({
+                    quantity: 1,
+                    product,
+                });
+            }
+
+            const newCartItems = [...prevState]; // lógica para adicionar 1 item ao carrinho por vez
+            const item = newCartItems[itemIndex];
+
+            newCartItems[itemIndex] = {
+                ...item, 
+                quantity: item.quantity + 1,
+                };
+
+                return newCartItems;
+            });
     }
 
     return (
@@ -69,7 +85,10 @@ export function Main() {
                     )}
 
                     {selectedTable && (
-                        <Cart cartItems={cartItems} />
+                        <Cart 
+                            cartItems={cartItems} 
+                            onAdd={handleAddToCart}
+                        />
                     )}
                 </FooterContainer>
             </Footer>

@@ -16,13 +16,19 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { PlusCircle } from '../Icons/PlusCircle';
 import { MinusCircle } from '../Icons/MinusCircle';
 import { Button } from '../Button';
+import { Product } from '../../types/Product';
 
 interface CartProps {
     cartItems: CartItem[];
+    onAdd: (product: Product) => void;
 }
 
 
-export function Cart({ cartItems }: CartProps) {
+export function Cart({ cartItems, onAdd }: CartProps) {
+    const total = cartItems.reduce((acc, cartItem) => {
+        return acc + cartItem.quantity * cartItem.product.price;
+    }, 0);
+
     return (
         <>
         <Text size={20} weight='600'>🛒 Carrinho de pedido</Text>
@@ -55,7 +61,10 @@ export function Cart({ cartItems }: CartProps) {
                     </ProductContainer>
 
                     <Actions>
-                        <TouchableOpacity style={{ marginRight: 24}}>
+                        <TouchableOpacity 
+                            style={{ marginRight: 24}}
+                            onPress={() => onAdd(cartItem.product)}
+                            >
                             <PlusCircle />
                         </TouchableOpacity>
 
@@ -73,7 +82,7 @@ export function Cart({ cartItems }: CartProps) {
                 {cartItems.length > 0 ? (
                     <>
                     <Text color='#666'>Total</Text>
-                    <Text size={20} weight='600'>{formatCurrency(6600)}</Text>
+                    <Text size={20} weight='600'>{formatCurrency(total)}</Text>
                     </>
                 ): ( 
                     <Text color='#999'>o seu carrinho  está vazio</Text>
