@@ -17,21 +17,41 @@ import { PlusCircle } from '../Icons/PlusCircle';
 import { MinusCircle } from '../Icons/MinusCircle';
 import { Button } from '../Button';
 import { Product } from '../../types/Product';
+import { OrderConfirmedModal } from '../OrderConfirmedModal';
+import { useState } from 'react';
 
 interface CartProps {
     cartItems: CartItem[];
     onAdd: (product: Product) => void;
     onDecrement: (product: Product) => void;
+    onConfirmOrder: () => void;
+    
 }
 
 
-export function Cart({ cartItems, onAdd, onDecrement }: CartProps) {
+export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder}: CartProps) {
+    const [isModalVisible, SetIsModalVisible ] = useState(false);
+
     const total = cartItems.reduce((acc, cartItem) => { // total a pagar 
         return acc + cartItem.quantity * cartItem.product.price;
     }, 0);
 
+    function handleConfirmOrder(){
+        SetIsModalVisible(true);
+    }
+
+    function handleOk(){
+        onConfirmOrder();
+        SetIsModalVisible(false);
+    }
+
     return (
         <>
+
+        <OrderConfirmedModal 
+            visible={isModalVisible}
+            onOk={handleOk}
+        />
         <Text size={20} weight='600'>🛒 Carrinho de pedido</Text>
         
         { cartItems.length > 0 && (
@@ -90,7 +110,7 @@ export function Cart({ cartItems, onAdd, onDecrement }: CartProps) {
                 )}
             </TotalContainer>
 
-            <Button onPress={()=> alert('confirmar pedido')}
+            <Button onPress={handleConfirmOrder}
                 disabled={cartItems.length === 0}
             >
                 confirmar pedido
