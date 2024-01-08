@@ -76,7 +76,7 @@ export function Cart({ cartItems }: CartProps) {
                     <Text size={20} weight='600'>{formatCurrency(6600)}</Text>
                     </>
                 ): ( 
-                    <Text color='#999'>o seu carrinho vazio</Text>
+                    <Text color='#999'>o seu carrinho  está vazio</Text>
                 )}
             </TotalContainer>
 

@@ -20,12 +20,18 @@ import { Button } from '../Button';
 interface ProductModalProps {
     visible: boolean;
     onClose: () => void;
-    product: null | Product
+    product: null | Product;
+    onAddToCart: (product: Product) => void;
 }
 
-export function ProductModal({ visible, onClose, product }: ProductModalProps) {
+export function ProductModal({ visible, onClose, product, onAddToCart }: ProductModalProps) {
     if (!product) {
         return null;
+    }
+
+    function handleAddToCart() {
+        onAddToCart(product!); // força (non-null)
+        onClose();
     }
 
     console.log(product);
@@ -81,7 +87,9 @@ export function ProductModal({ visible, onClose, product }: ProductModalProps) {
                         <Text weight='600' size={20}>{formatCurrency(product.price)}</Text>
                     </PriceContainer>
 
-                    <Button onPress={() => alert('Adicionar ao pedido')}>Adicionar ao pedido</Button>
+                    <Button onPress={handleAddToCart}>
+                        Adicionar ao pedido
+                    </Button>
                 </FooterContainer>
             </Footer>
 

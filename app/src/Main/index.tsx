@@ -14,19 +14,14 @@ import { Table } from '../components/TableModal';
 import { useState } from 'react';
 import { Cart } from '../components/Cart';
 import { CartItem } from '../types/CartItem';
-import { products } from '../mocks/products';
-
+import { Product } from '../types/Product';
 
 export function Main() {
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
     const [selectedTable, setSelectedTable] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([
-      /* {
-            quantity: 1,
-            product: products[0]
-        },
+      
 
-*/ 
   ]);
 
 
@@ -36,6 +31,14 @@ export function Main() {
 
     function handleCancelOrder() {
         setSelectedTable('');
+    }
+
+    function handleAddToCart(product: Product) {
+        if(!selectedTable){
+            setIsTableModalVisible(true);
+        }
+
+        alert(product.name);
     }
 
     return (
@@ -51,7 +54,7 @@ export function Main() {
                 </CategoryContainer>
 
                 <MenuContainer>
-                    <Menu />
+                    <Menu onAddToCart={handleAddToCart} />
                 </MenuContainer>
 
 
