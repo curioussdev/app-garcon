@@ -3,7 +3,8 @@ import {
     CategoryContainer,
     MenuContainer,
     Footer,
-    FooterContainer
+    FooterContainer,
+    CenteredContainer
 } from './styles';
 
 import { Header } from '../components/Header';
@@ -15,11 +16,13 @@ import { useState } from 'react';
 import { Cart } from '../components/Cart';
 import { CartItem } from '../types/CartItem';
 import { Product } from '../types/Product';
+import { ActivityIndicator } from 'react-native';
 
 export function Main() {
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
     const [selectedTable, setSelectedTable] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [isLoading,] = useState(false);
 
 
     function handleSaveTable(table: string) {
@@ -36,14 +39,14 @@ export function Main() {
     }
 
     function handleAddToCart(product: Product) {
-        if(!selectedTable){
+        if (!selectedTable) {
             setIsTableModalVisible(true);
         }
 
         setCartItems((prevState) => {
-            const itemIndex = prevState.findIndex(cartItem => cartItem.product._id=== product._id);
+            const itemIndex = prevState.findIndex(cartItem => cartItem.product._id === product._id);
 
-            if(itemIndex < 0) {
+            if (itemIndex < 0) {
                 return prevState.concat({
                     quantity: 1,
                     product,
@@ -54,36 +57,36 @@ export function Main() {
             const item = newCartItems[itemIndex];
 
             newCartItems[itemIndex] = {
-                ...item, 
+                ...item,
                 quantity: item.quantity + 1,
-                };
-
-                return newCartItems;
-            });
-    }
-
-    function handleDecrementCartItem(product: Product){
-       setCartItems((prevState) => {
-        const itemIndex = prevState.findIndex(
-            cartItem => cartItem.product._id=== product._id
-        );
-
-        const item = prevState[itemIndex];
-        const newCartItems = [...prevState];
-        
-        if(item.quantity === 1){
-            newCartItems.splice(itemIndex, 1); 
+            };
 
             return newCartItems;
-        }
+        });
+    }
 
-        newCartItems[itemIndex] = {
-            ...item,
-            quantity: item.quantity -1,
-        };
-        return newCartItems;
-            
-    });
+    function handleDecrementCartItem(product: Product) {
+        setCartItems((prevState) => {
+            const itemIndex = prevState.findIndex(
+                cartItem => cartItem.product._id === product._id
+            );
+
+            const item = prevState[itemIndex];
+            const newCartItems = [...prevState];
+
+            if (item.quantity === 1) {
+                newCartItems.splice(itemIndex, 1);
+
+                return newCartItems;
+            }
+
+            newCartItems[itemIndex] = {
+                ...item,
+                quantity: item.quantity - 1,
+            };
+            return newCartItems;
+
+        });
 
     }
 
@@ -96,6 +99,17 @@ export function Main() {
                     onCancelOrder={handleCancelOrder}
                 />
 
+                {isLoading && (
+                    <CenteredContainer>
+                        <ActivityIndicator 
+                            color="#D73035"
+                            size="large"
+                        />
+                    </CenteredContainer>
+                )}
+
+                {!isLoading && (
+                    <>
                 <CategoryContainer>
                     <Categories />
                 </CategoryContainer>
@@ -103,6 +117,8 @@ export function Main() {
                 <MenuContainer>
                     <Menu onAddToCart={handleAddToCart} />
                 </MenuContainer>
+                </>
+                )}
 
 
             </Container>
@@ -110,14 +126,16 @@ export function Main() {
             <Footer>
                 <FooterContainer>
                     {!selectedTable && (
-                        <Button onPress={() => setIsTableModalVisible(true)}>
+                        <Button onPress={() => setIsTableModalVisible(true)}
+                            disabled={isLoading}
+                        >
                             Novo Pedido
                         </Button>
                     )}
 
                     {selectedTable && (
-                        <Cart 
-                            cartItems={cartItems} 
+                        <Cart
+                            cartItems={cartItems}
                             onAdd={handleAddToCart}
                             onDecrement={handleDecrementCartItem}
                             onConfirmOrder={handleConfirmOrder}

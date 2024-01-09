@@ -1,15 +1,15 @@
 import { FlatList, TouchableOpacity } from 'react-native';
 import { CartItem } from '../../types/CartItem';
 
-import { 
+import {
     Item,
-     ProductContainer, 
-     Actions, 
-     Image, 
-     QuantityContainer,
-     ProductDetails,
-     Summary,
-     TotalContainer
+    ProductContainer,
+    Actions,
+    Image,
+    QuantityContainer,
+    ProductDetails,
+    Summary,
+    TotalContainer
 } from './styles';
 import { Text } from '../Text';
 import { formatCurrency } from '../../utils/formatCurrency';
@@ -25,22 +25,23 @@ interface CartProps {
     onAdd: (product: Product) => void;
     onDecrement: (product: Product) => void;
     onConfirmOrder: () => void;
-    
+
 }
 
 
-export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder}: CartProps) {
-    const [isModalVisible, SetIsModalVisible ] = useState(false);
+export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder }: CartProps) {
+    const [isLoading] = useState(false);
+    const [isModalVisible, SetIsModalVisible] = useState(false);
 
     const total = cartItems.reduce((acc, cartItem) => { // total a pagar 
         return acc + cartItem.quantity * cartItem.product.price;
     }, 0);
 
-    function handleConfirmOrder(){
+    function handleConfirmOrder() {
         SetIsModalVisible(true);
     }
 
-    function handleOk(){
+    function handleOk() {
         onConfirmOrder();
         SetIsModalVisible(false);
     }
@@ -48,77 +49,79 @@ export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder}: CartProps
     return (
         <>
 
-        <OrderConfirmedModal 
-            visible={isModalVisible}
-            onOk={handleOk}
-        />
-        <Text size={20} weight='600'>🛒 Carrinho de pedido</Text>
-        
-        { cartItems.length > 0 && (
-            <FlatList
-            data={cartItems}
-            keyExtractor={cartItem => cartItem.product._id}
-            showsVerticalScrollIndicator={false}
-            style={{ marginBottom: 20, maxHeight: 140}}
-            renderItem={({ item: cartItem }) => (
-                <Item>
-                    <ProductContainer>
-                        <Image
-                            source={{
-                                uri: `http://192.168.0.110:3001/uploads/${cartItem.product.imagePath}`
-                            }}
-                        />
+            <OrderConfirmedModal
+                visible={isModalVisible}
+                onOk={handleOk}
+            />
+            <Text size={20} weight='600'>🛒 Carrinho de pedido</Text>
 
-                        <QuantityContainer>
-                            <Text size={14} color='#666'>
-                                {cartItem.quantity}x
-                            </Text>
-                        </QuantityContainer>
+            {cartItems.length > 0 && (
+                <FlatList
+                    data={cartItems}
+                    keyExtractor={cartItem => cartItem.product._id}
+                    showsVerticalScrollIndicator={false}
+                    style={{ marginBottom: 20, maxHeight: 140 }}
+                    renderItem={({ item: cartItem }) => (
+                        <Item>
+                            <ProductContainer>
+                                <Image
+                                    source={{
+                                        uri: `http://192.168.0.110:3001/uploads/${cartItem.product.imagePath}`
+                                    }}
+                                />
 
-                        <ProductDetails>
-                            <Text size={14} weight='600'>{cartItem.product.name}</Text>
-                            <Text size={14} style={{marginTop: 4}} >{formatCurrency(cartItem.product.price)}</Text>
-                        </ProductDetails>
-                    </ProductContainer>
+                                <QuantityContainer>
+                                    <Text size={14} color='#666'>
+                                        {cartItem.quantity}x
+                                    </Text>
+                                </QuantityContainer>
 
-                    <Actions>
-                        <TouchableOpacity 
-                            style={{ marginRight: 24}}
-                            onPress={() => onAdd(cartItem.product)}
-                            >
-                            <PlusCircle />
-                        </TouchableOpacity>
+                                <ProductDetails>
+                                    <Text size={14} weight='600'>{cartItem.product.name}</Text>
+                                    <Text size={14} style={{ marginTop: 4 }} >{formatCurrency(cartItem.product.price)}</Text>
+                                </ProductDetails>
+                            </ProductContainer>
 
-                        <TouchableOpacity onPress={() => onDecrement(cartItem.product)}>
-                            <MinusCircle />
-                        </TouchableOpacity>
-                    </Actions>
-                </Item>
+                            <Actions>
+                                <TouchableOpacity
+                                    style={{ marginRight: 24 }}
+                                    onPress={() => onAdd(cartItem.product)}
+                                >
+                                    <PlusCircle />
+                                </TouchableOpacity>
+
+                                <TouchableOpacity onPress={() => onDecrement(cartItem.product)}>
+                                    <MinusCircle />
+                                </TouchableOpacity>
+                            </Actions>
+                        </Item>
+                    )}
+                />
             )}
-        />
-        )}
 
-        <Summary>
-            <TotalContainer>
-                {cartItems.length > 0 ? (
-                    <>
-                    <Text color='#666'>Total</Text>
-                    <Text size={16} weight='600'>{formatCurrency(total)}</Text>
-                    </>
-                ): ( 
-                    <Text color='#999'>o seu carrinho  está vazio</Text>
-                )}
-            </TotalContainer>
+            <Summary>
+                <TotalContainer>
+                    {cartItems.length > 0 ? (
+                        <>
+                            <Text color='#666'>Total</Text>
+                            <Text size={16} weight='600'>{formatCurrency(total)}</Text>
+                        </>
+                    ) : (
+                        <Text color='#999'>o seu carrinho  está vazio</Text>
+                    )}
+                </TotalContainer>
 
-            <Button onPress={handleConfirmOrder}
-                disabled={cartItems.length === 0}
-            >
-                confirmar pedido
-            </Button> 
-                
-            
+                <Button
+                    onPress={handleConfirmOrder}
+                    disabled={cartItems.length === 0}
+                    loading={isLoading}
+                >
+                    confirmar pedido
+                </Button>
 
-        </Summary>
+
+
+            </Summary>
 
         </>
     );
