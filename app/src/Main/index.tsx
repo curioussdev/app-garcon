@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {
     Container,
     CategoryContainer,
@@ -12,7 +14,7 @@ import { Categories } from '../components/Categories';
 import { Menu } from '../components/Menu';
 import { Button } from '../components/Button';
 import { Table } from '../components/TableModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Cart } from '../components/Cart';
 import { CartItem } from '../types/CartItem';
 import { Product } from '../types/Product';
@@ -28,9 +30,37 @@ export function Main() {
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
     const [selectedTable, setSelectedTable] = useState('');
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
-    const [isLoading,] = useState(false);
-    const [products] = useState<Product[]>([]);
-    const [categories] = useState<Category[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [products, setProducts] = useState<Product[]>([]);
+    
+
+    useEffect(() => {
+        Promise.all([
+            axios.get('http://192.168.100.237:3001/categories'),
+            axios.get('http://192.168.100.237:3001/products')
+        ]).then(([categoriesResponse, productsResponse]) => {
+            setCategories(categoriesResponse.data);
+            setProducts(productsResponse.data);
+            setIsLoading(false);
+        });
+
+
+
+/*
+
+        axios.get('http://192.168.100.237:3001/categories').then((response) => {
+            setCategories(response.data);
+            
+        });
+
+        axios.get('http://192.168.100.237:3001/products').then((response) => {
+            setProducts(response.data);
+            
+        });
+
+        */
+    }, []);
 
 
     function handleSaveTable(table: string) {
