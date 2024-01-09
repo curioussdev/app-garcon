@@ -18,9 +18,11 @@ import { CartItem } from '../types/CartItem';
 import { Product } from '../types/Product';
 import { ActivityIndicator } from 'react-native';
 
-import { products as mockProducts } from '../mocks/products';
+// import { products as mockProducts } from '../mocks/products';
+// import { categories as mockCategories } from '../mocks/categories';
 import { Empty } from '../components/Icons/Empty';
 import { Text } from '../components/Text';
+import { Category } from '../types/Category';
 
 export function Main() {
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
@@ -28,6 +30,7 @@ export function Main() {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [isLoading,] = useState(false);
     const [products] = useState<Product[]>([]);
+    const [categories] = useState<Category[]>([]);
 
 
     function handleSaveTable(table: string) {
@@ -116,7 +119,9 @@ export function Main() {
                 {!isLoading && (
                     <>
                         <CategoryContainer>
-                            <Categories />
+                            <Categories 
+                                categories={categories}
+                            />
                         </CategoryContainer>
 
                         {products.length > 0 ? (
