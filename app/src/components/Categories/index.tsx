@@ -9,13 +9,16 @@ import { Category } from '../../types/Category';
 
 interface CategoryProps {
     categories: Category[];
+    onSelectCategory: (categoryId: string) => Promise<void>;
 }
 
-export function Categories({ categories}: CategoryProps) {
+export function Categories({ categories, onSelectCategory}: CategoryProps) {
     const [selectedCategory, setSelectedCategory] = useState('');
 
     function handleSelectedCategory(categoryId: string) {
         const category = selectedCategory === categoryId ? '' : categoryId; // se o user clicar em uma cat, chama o handleSelectedCategory, caso não, permanece no unitial state
+        
+        onSelectCategory(category);
         setSelectedCategory(category);
     }
     return (
