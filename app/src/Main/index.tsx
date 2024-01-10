@@ -46,6 +46,7 @@ export function Main() {
         ]).then(([categoriesResponse, productsResponse]) => {
             setCategories(categoriesResponse.data);
             setProducts(productsResponse.data);
+            
             setIsLoading(false);
         });
 
@@ -221,6 +222,7 @@ export function Main() {
                             onAdd={handleAddToCart}
                             onDecrement={handleDecrementCartItem}
                             onConfirmOrder={handleConfirmOrder}
+                            selectedTable={selectedTable}
                         />
                     )}
                 </FooterContainer>

@@ -19,26 +19,69 @@ import { Button } from '../Button';
 import { Product } from '../../types/Product';
 import { OrderConfirmedModal } from '../OrderConfirmedModal';
 import { useState } from 'react';
+import { api } from '../../utils/api';
+
 
 interface CartProps {
     cartItems: CartItem[];
     onAdd: (product: Product) => void;
     onDecrement: (product: Product) => void;
     onConfirmOrder: () => void;
+    selectedTable: string;
 
 }
 
 
-export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder }: CartProps) {
-    const [isLoading] = useState(false);
+export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder, selectedTable }: CartProps) {
+    const [isLoading, setIsLoading] = useState(false);
     const [isModalVisible, SetIsModalVisible] = useState(false);
 
     const total = cartItems.reduce((acc, cartItem) => { // total a pagar 
         return acc + cartItem.quantity * cartItem.product.price;
     }, 0);
 
-    function handleConfirmOrder() {
-        SetIsModalVisible(true);
+    async function handleConfirmOrder() {
+        /* setIsLoading(true);
+
+        await api.post('/orders', {
+            table: selectedTable,
+            products: cartItems.map((cartItem) => ({
+                productId: cartItem.product._id,
+                quantity: cartItem.quantity
+            })),
+        } ).then((err) => {
+            console.log(err.data);
+        }); 
+
+        setIsLoading(false);
+        SetIsModalVisible(true); */
+
+        setIsLoading(true);
+
+        const payload = {
+            table: selectedTable,
+            products: cartItems.map((cartItem) => ({
+                product: cartItem.product._id,
+                quantity: cartItem.quantity
+            })),
+        };
+
+        api.post('/orders', payload).then((response) => {
+            console.log(response.data = JSON.stringify(response ));
+        }).catch((err) => {
+            console.log(err);
+        });
+
+        console.log(JSON.stringify(payload, null, 2));
+
+       setIsLoading(false);
+
+       
+
+
+
+
+       SetIsModalVisible(true);
     }
 
     function handleOk() {
@@ -66,7 +109,7 @@ export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder }: CartProp
                             <ProductContainer>
                                 <Image
                                     source={{
-                                        uri: `http://192.168.0.110:3001/uploads/${cartItem.product.imagePath}`
+                                        uri: `http://192.168.100.237:3001/uploads/${cartItem.product.imagePath}`
                                     }}
                                 />
 
