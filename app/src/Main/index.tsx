@@ -1,4 +1,4 @@
-import axios from 'axios';
+//import axios from 'axios';
 
 import {
     Container,
@@ -26,6 +26,8 @@ import { Empty } from '../components/Icons/Empty';
 import { Text } from '../components/Text';
 import { Category } from '../types/Category';
 
+import { api } from '../utils/api';
+
 export function Main() {
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
     const [selectedTable, setSelectedTable] = useState('');
@@ -34,11 +36,12 @@ export function Main() {
     const [categories, setCategories] = useState<Category[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     
+    
 
     useEffect(() => {
         Promise.all([
-            axios.get('http://192.168.100.237:3001/categories'),
-            axios.get('http://192.168.100.237:3001/products')
+            api.get('/categories'),
+            api.get('/products'),
         ]).then(([categoriesResponse, productsResponse]) => {
             setCategories(categoriesResponse.data);
             setProducts(productsResponse.data);
