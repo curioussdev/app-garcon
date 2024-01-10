@@ -12,6 +12,14 @@ mongoose.connect('mongodb+srv://billadas:billadas2023@cluster0.yzte6mi.mongodb.n
 		const app = express();
 		const port = 3001;
 
+		app.use((req, res, next) => {
+			res.setHeader('Access-Control-Allow-Origin', '*');
+			res.setHeader('Access-Control-Allow-Methods', '*');
+			res.setHeader('Access-Control-Allow-Headers', '*');
+
+			next()
+		});
+
 		app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 		app.use(express.json()); // transforma os arquivos da requisição em json. EX: icon de Pizza 🍕
 		app.use(router);

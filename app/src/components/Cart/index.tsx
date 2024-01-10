@@ -67,21 +67,15 @@ export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder, selectedTa
         };
 
         api.post('/orders', payload).then((response) => {
-            console.log(response.data = JSON.stringify(response ));
+            console.log(response.data = JSON.stringify(response));
         }).catch((err) => {
             console.log(err);
         });
-
         console.log(JSON.stringify(payload, null, 2));
 
-       setIsLoading(false);
 
-       
-
-
-
-
-       SetIsModalVisible(true);
+        setIsLoading(false);
+        SetIsModalVisible(true);
     }
 
     function handleOk() {
