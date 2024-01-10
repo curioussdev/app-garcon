@@ -35,8 +35,9 @@ export function Main() {
     const [isLoading, setIsLoading] = useState(true);
     const [categories, setCategories] = useState<Category[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
-    
-    
+    const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+
+
 
     useEffect(() => {
         Promise.all([
@@ -50,26 +51,32 @@ export function Main() {
 
 
 
-/*
-
-        axios.get('http://192.168.100.237:3001/categories').then((response) => {
-            setCategories(response.data);
-            
-        });
-
-        axios.get('http://192.168.100.237:3001/products').then((response) => {
-            setProducts(response.data);
-            
-        });
-
-        */
+        /*
+        
+                axios.get('http://192.168.100.237:3001/categories').then((response) => {
+                    setCategories(response.data);
+                    
+                });
+        
+                axios.get('http://192.168.100.237:3001/products').then((response) => {
+                    setProducts(response.data);
+                    
+                });
+        
+                */
     }, []);
 
-    async function handleSelectCategory(categoryId: string){
+    async function handleSelectCategory(categoryId: string) { // bloco para verif e trazer as categoty by ID
         const route = !categoryId ? '/products' : `/categories/${categoryId}/products`;
 
+        setIsLoadingProducts(true);
+
+        //await new Promise(resolve => setTimeout(resolve, 2000)); TESTANDO LOADER DOS PRODUTOS
         const { data } = await api.get(route);
+
         setProducts(data);
+        setIsLoadingProducts(false);
+
     }
 
     function handleSaveTable(table: string) {
@@ -158,27 +165,40 @@ export function Main() {
                 {!isLoading && (
                     <>
                         <CategoryContainer>
-                            <Categories 
+                            <Categories
                                 categories={categories}
                                 onSelectCategory={handleSelectCategory}
                             />
                         </CategoryContainer>
 
-                        {products.length > 0 ? (
-                            <MenuContainer>
-                                <Menu
-                                    onAddToCart={handleAddToCart}
-                                    products={products}
-                                />
-                            </MenuContainer>
-                        ) :(
+                        {isLoadingProducts ? (
                             <CenteredContainer>
-                                <Empty />
-                                <Text color='#666' style={{ marginTop: 24}}>
-                                    Nenhum produto foi encontrado!
-                                </Text>
+                                <ActivityIndicator
+                                    color="#D73035"
+                                    size="large"
+                                />
                             </CenteredContainer>
+                        ) : (
+                            <>
+                                {products.length > 0 ? (
+                                    <MenuContainer>
+                                        <Menu
+                                            onAddToCart={handleAddToCart}
+                                            products={products}
+                                        />
+                                    </MenuContainer>
+                                ) : (
+                                    <CenteredContainer>
+                                        <Empty />
+                                        <Text color='#666' style={{ marginTop: 24 }}>
+                                            Nenhum produto foi encontrado!
+                                        </Text>
+                                    </CenteredContainer>
+                                )}
+                            </>
                         )}
+
+
                     </>
                 )}
 
