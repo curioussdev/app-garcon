@@ -8,10 +8,11 @@ import { useEffect } from 'react';
 interface OrderModalProps {
   visible: boolean;
   order: Order | null;
-  onClose():  void;
+  onClose(): void;
   onCancelOrder: () => void;
   isLoading: boolean;
-  
+  onChangeOrderStatus: () => void;
+
 }
 
 const status = {
@@ -21,11 +22,17 @@ const status = {
 
 }
 
-export function OrderModal({ visible, order, onClose, onCancelOrder, isLoading}: OrderModalProps) {
+export function OrderModal({ 
+  visible, 
+  order, 
+  onClose, 
+  onCancelOrder, 
+  isLoading, 
+  onChangeOrderStatus }: OrderModalProps) {
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
-      if(event.key === 'Escape') {
+      if (event.key === 'Escape') {
         onClose()
       }
     }
@@ -47,7 +54,7 @@ export function OrderModal({ visible, order, onClose, onCancelOrder, isLoading}:
   // total += product.price * quantity
   //});
 
-  
+
 
   const total = order.products.reduce((total, { product, quantity }) => {
 
@@ -110,20 +117,32 @@ export function OrderModal({ visible, order, onClose, onCancelOrder, isLoading}:
         </OrderDetails>
 
         <Actions>
-          <button 
-          type='button' 
-          className='primary'
-          disabled={isLoading}
-          >
-            <span>👩‍🍳</span>
-            <span>Iniciar produção</span>
-          </button>
 
-          <button 
-          type='button' 
-          className='secondary'
-          onClick={onCancelOrder}
-          disabled={isLoading}
+          {order.status !== 'DONE' && (
+            <button
+              type='button'
+              className='primary'
+              disabled={isLoading}
+              onClick={onChangeOrderStatus}
+            >
+              <span>
+                {order.status === 'WAITING' && '👩‍🍳'}
+                {order.status === 'IN_PRODUCTION' && '✅'}
+              </span>
+              <span>
+                {order.status === 'WAITING' && 'Iniciar produção'}
+                {order.status === 'IN_PRODUCTION' && 'Concluir Pedido'}
+              </span>
+            </button>
+          )}
+
+
+
+          <button
+            type='button'
+            className='secondary'
+            onClick={onCancelOrder}
+            disabled={isLoading}
           >
             Cancelar Pedido
           </button>
