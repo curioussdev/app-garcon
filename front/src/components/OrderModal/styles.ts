@@ -129,6 +129,11 @@ flex-direction: column;
 align-items: center;
 margin: 20px 0px;
 
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
   .primary{
     width: 100%;
     background: #333333;

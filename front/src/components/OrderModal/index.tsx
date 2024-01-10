@@ -9,6 +9,9 @@ interface OrderModalProps {
   visible: boolean;
   order: Order | null;
   onClose():  void;
+  onCancelOrder: () => void;
+  isLoading: boolean;
+  
 }
 
 const status = {
@@ -18,7 +21,7 @@ const status = {
 
 }
 
-export function OrderModal({ visible, order, onClose }: OrderModalProps) {
+export function OrderModal({ visible, order, onClose, onCancelOrder, isLoading}: OrderModalProps) {
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -44,11 +47,12 @@ export function OrderModal({ visible, order, onClose }: OrderModalProps) {
   // total += product.price * quantity
   //});
 
+  
+
   const total = order.products.reduce((total, { product, quantity }) => {
+
     return total + (product.price * quantity)
   }, 0);
-
- 
 
   return (
     <Overlay>
@@ -87,7 +91,7 @@ export function OrderModal({ visible, order, onClose }: OrderModalProps) {
                   height="40"
                 />
 
-                <span className="quantity">{quantity}x </span>
+                <span className="quantity">{quantity}x</span>
 
                 <div className="product-details">
                   <strong>{product.name}</strong>
@@ -106,12 +110,21 @@ export function OrderModal({ visible, order, onClose }: OrderModalProps) {
         </OrderDetails>
 
         <Actions>
-          <button type='button' className='primary'>
+          <button 
+          type='button' 
+          className='primary'
+          disabled={isLoading}
+          >
             <span>👩‍🍳</span>
             <span>Iniciar produção</span>
           </button>
 
-          <button type='button' className='secondary'>
+          <button 
+          type='button' 
+          className='secondary'
+          onClick={onCancelOrder}
+          disabled={isLoading}
+          >
             Cancelar Pedido
           </button>
         </Actions>
