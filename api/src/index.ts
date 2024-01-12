@@ -2,7 +2,7 @@ import path from 'node:path';
 import http from 'node:http';
 import express from 'express';
 import mongoose from 'mongoose';
-import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
 
 import { router } from './router';
 

@@ -17,7 +17,7 @@ export function Orders() {
     
     socket.on('order@new', (order) => {
       setOrders(prevState => prevState.concat(order));
-      //console.log('Novo pedido cadastrado no banco de dados', order);
+      //console.log('Novo pedido cadastrado no banco de dados in real time', order);
     })
     
   }, []);
