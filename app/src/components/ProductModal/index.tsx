@@ -17,6 +17,7 @@ import { Text } from '../Text';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { Button } from '../Button';
 
+
 interface ProductModalProps {
     visible: boolean;
     onClose: () => void;
@@ -27,6 +28,8 @@ interface ProductModalProps {
 
 
 export function ProductModal({ visible, onClose, product, onAddToCart }: ProductModalProps) {
+  
+
     if (!product) {
         return null;
     }
@@ -36,7 +39,7 @@ export function ProductModal({ visible, onClose, product, onAddToCart }: Product
         onClose();
     }
 
-    console.log(product);
+    console.log(JSON.stringify(product.ingredients));
     return (
         <Modal
             visible={visible}
