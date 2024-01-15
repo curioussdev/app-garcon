@@ -26,6 +26,8 @@ export function Orders() {
     api.get('/orders')
     .then(({data}) => {
       setOrders(data);
+
+      console.log(data)
     });
   }, []);
 

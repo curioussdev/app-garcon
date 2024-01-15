@@ -8,6 +8,8 @@ export async function listProducts(req: Request, res: Response) {
 
 		const products = await Product.find();
 
+		console.log(products);
+
 		res.json(products);
 	} catch (error) {
 		console.log(error);
