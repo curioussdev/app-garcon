@@ -34,8 +34,8 @@ mongoose.connect('mongodb+srv://billadas:billadas2023@cluster0.yzte6mi.mongodb.n
 		});
 
 	})
-	.catch(() => {
-		console.log('Erro ao conectar com Banco de Dados');
+	.catch((e) => {
+		console.log('Erro ao conectar com Banco de Dados', e);
 	});
 
 

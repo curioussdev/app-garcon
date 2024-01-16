@@ -55,22 +55,14 @@ export function OrderModal({
   //});
 
 
-  const orderTeste = [];
 
-  orderTeste.push(order.products);
- 
+  const total = order.products.reduce((total, { product, quantity }) => {
+      console.log(product.price * quantity);
+      
+    return total + (product.price * quantity)
+  }, 0);
 
- 
-  const total = Orders[0].reduce((total, products) => {
-    console.log(";Preço", products.product.price, ";Quantidade:", products.quantity);
-    
-    return total = 3;
-    
-    //return total + (product.price * quantity  )
-}, 0);
-
-console.log("Total:", formatCurrency(orderTeste)) 
-    return (
+  return (
     <Overlay>
       <ModalBody>
         <header>

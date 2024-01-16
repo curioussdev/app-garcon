@@ -41,7 +41,7 @@ export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder, selectedTa
     }, 0);
 
     async function handleConfirmOrder() {
-        /* setIsLoading(true);
+         setIsLoading(true);
 
         await api.post('/orders', {
             table: selectedTable,
@@ -54,17 +54,20 @@ export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder, selectedTa
         }); 
 
         setIsLoading(false);
-        SetIsModalVisible(true); */
+        SetIsModalVisible(true); 
 
-        setIsLoading(true);
+       /* setIsLoading(true);
 
         const payload = {
             table: selectedTable,
-            products: cartItems.map((cartItem) => ({
-                product: cartItem.product._id,
-                quantity: cartItem.quantity
+            products: cartItems.map(({product, quantity}) => ({
+                product: product._id,
+                quantity: quantity
             })),
-        };
+
+    };
+
+    console.log(payload);
 
         api.post('/orders', payload).then((response) => {
             console.log(response.data = JSON.stringify(response));
@@ -72,7 +75,7 @@ export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder, selectedTa
             console.log(err);
         });
         console.log(JSON.stringify(payload, null, 2));
-
+*/
 
         setIsLoading(false);
         SetIsModalVisible(true);

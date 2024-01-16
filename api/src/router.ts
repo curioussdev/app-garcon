@@ -11,6 +11,7 @@ import { listOrders } from './app/useCases/orders/listOrders';
 import { createOrder } from './app/useCases/orders/createOrder';
 import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
 import { cancelOrder } from './app/useCases/orders/cancelOrder';
+import { findOneProduct } from './app/useCases/products/findOneProduct';
 
 export const router = Router();
 
@@ -36,6 +37,7 @@ router.post('/categories', createCategories);
 
 // List products
 router.get('/products', listProducts);
+router.get('/products/:id', findOneProduct);
 
 // Create products (whitout dashboard)
 router.post('/products', upload.single('image'), createProduct);
