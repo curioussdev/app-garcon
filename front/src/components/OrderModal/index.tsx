@@ -22,12 +22,12 @@ const status = {
 
 }
 
-export function OrderModal({ 
-  visible, 
-  order, 
-  onClose, 
-  onCancelOrder, 
-  isLoading, 
+export function OrderModal({
+  visible,
+  order,
+  onClose,
+  onCancelOrder,
+  isLoading,
   onChangeOrderStatus }: OrderModalProps) {
 
   useEffect(() => {
@@ -57,8 +57,8 @@ export function OrderModal({
 
 
   const total = order.products.reduce((total, { product, quantity }) => {
-      console.log(product.price * quantity);
-      
+    console.log(product.price * quantity);
+
     return total + (product.price * quantity)
   }, 0);
 
@@ -119,7 +119,7 @@ export function OrderModal({
 
         <Actions>
 
-          {order.status !== 'DONE' && (
+          {order.status !== 'DONE' ? (
             <button
               type='button'
               className='primary'
@@ -135,18 +135,28 @@ export function OrderModal({
                 {order.status === 'IN_PRODUCTION' && 'Concluir Pedido'}
               </span>
             </button>
-          )}
+          ) : <span>
+            {order.status === 'DONE' &&
+
+              <button
+                type='button'
+                className='secondary'
+                onClick={onCancelOrder}
+                disabled={isLoading}
+              >
+                limpar mesa
+              </button>}
+          </span>}
 
 
-
-          <button
+          {order.status !== 'DONE' && <button
             type='button'
             className='secondary'
             onClick={onCancelOrder}
             disabled={isLoading}
           >
             Cancelar Pedido
-          </button>
+          </button>}
         </Actions>
 
       </ModalBody>

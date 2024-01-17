@@ -46,7 +46,7 @@ export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder, selectedTa
         await api.post('/orders', {
             table: selectedTable,
             products: cartItems.map((cartItem) => ({
-                productId: cartItem.product._id,
+                product: cartItem.product._id,
                 quantity: cartItem.quantity
             })),
         } ).then((err) => {
@@ -106,7 +106,7 @@ export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder, selectedTa
                             <ProductContainer>
                                 <Image
                                     source={{
-                                        uri: `http://192.168.100.237:3001/uploads/${cartItem.product.imagePath}`
+                                        uri: `http://192.168.18.81:3001/uploads/${cartItem.product.imagePath}`
                                     }}
                                 />
 
