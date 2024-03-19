@@ -13,7 +13,7 @@ const app = express();
 const server = http.createServer(app);
 export const io = new Server(server); // habilitando o app por intermédio do server http nativo do node
 
-mongoose.connect('mongodb+srv://billadas:billadas2023@cluster0.yzte6mi.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://lopes2000:billadas@cluster0.ohx7aip.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 	.then(() => {
 		const port = 3001;
 
